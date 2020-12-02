@@ -1,5 +1,27 @@
 import random
 
+
+def generate_random_locations(n, n_stars):
+    lis = list()
+    while len(lis) < n_stars:
+        x = random.randint(0, n - 1)
+        if x not in lis:
+            lis.append(x)
+    return lis
+
+
+def generate_miss_word(word):
+    max_length = len(word)
+    max_spaces = max_length // 2
+    locations = generate_random_locations(max_length, max_spaces)
+    print(locations, "locations")
+    word_list = list(word)
+    for i in locations:
+        word_list[i] = '*'
+    missed_word = ''.join(word_list)
+    print(missed_word)
+
+
 name = input("What is your name? ")
 print("Good Luck ! ", name)
 words = ['rainbow', 'computer', 'science', 'programming', 'python', 'mathematics', 'player', 'condition',
@@ -43,4 +65,29 @@ words = ['rainbow', 'computer', 'science', 'programming', 'python', 'mathematics
          'advertisement', 'cyber', 'wheel', 'bullockcart', 'building', 'education', 'environment', 'notes',
          'individual', 'new', 'refresh', 'website', 'lightup', 'laugh', 'lighthouse', 'beach', 'continent', 'pacific',
          'noun', 'verb', 'nature', 'herbal', 'lifetime', 'understanding', 'sucess', 'successful']
-word = random.choice(words)
+simplicity = int(input("Enter\n1 -> Simple \n2 -> Medium \n3 -> Hard \n"))
+random_word = ''
+if simplicity == 1:
+    random_word = random.choice(words)
+    while True:
+        random_word = random.choice(words)
+        if len(random_word) <= 5:
+            break
+elif simplicity == 2:
+    random_word = random.choice(words)
+    while True:
+        random_word = random.choice(words)
+        if 5 < len(random_word) <= 7:
+            break
+elif simplicity == 3:
+    random_word = random.choice(words)
+    while True:
+        random_word = random.choice(words)
+        if 7 < len(random_word):
+            break
+
+else:
+    print("Please enter the difficulty correctly")
+
+print(random_word)
+generate_miss_word(random_word)
